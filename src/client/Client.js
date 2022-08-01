@@ -37,7 +37,7 @@ class Client extends EventEmitter {
       this.sendWebsocket("Authenticate", {token: this.token})
       setInterval(function(){
         this.sendWebsocket("Ping", {data:0})
-      },12000)
+      }.bind(this),12000)
       console.log('Lumine.js Succesfull To Connect Websocket');
     }
     this.ws.onclose = this.ws.onerror = (e) => {

@@ -1,5 +1,5 @@
 //========== STRUCTURE DATA
-const Constants = require("./../util/constants.js")
+//const Constants = require("./../util/constants.js")
 
 //========== PACKAGE
 const { EventEmitter } = require("node:events")

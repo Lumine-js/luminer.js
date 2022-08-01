@@ -25,14 +25,18 @@ class Client extends EventEmitter {
     return this.ws.destroy()
   }
 
+  postCommand(commandsarray, guildid) {
+    
+  }
+
   startWebsocket() {
     let wssurl = `wss://ws.revolt.chat?version=1&format=json`
  
     this.ws = new WebSocket(wssurl);
     this.ws.onopen = () => {
-      this.ws.sendWebsocket("Authenticate", {token: this.token})
+      this.sendWebsocket("Authenticate", {token: this.token})
       setInterval(function(){
-        this.ws.sendWebsocket("Ping", {data:0})
+        this.sendWebsocket("Ping", {data:0})
       },12000)
       console.log('Lumine.js Succesfull To Connect Websocket');
     }

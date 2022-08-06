@@ -1,5 +1,8 @@
 //========== STRUCTURE DATA
+const Constants = require("./../util/constants.js")
 
+const UserClient = require("./../structure/UserClient.js")
+const Message = require("./../structure/Message.js")
 //========== PACKAGE
 const { EventEmitter } = require("node:events")
 const axios = require('axios')
@@ -43,12 +46,15 @@ class Client extends EventEmitter {
     this.ws.onmessage = ({ data }) => {
       let packet = JSON.parse(data)
       console.log(packet)
-      /*
+
       switch (packet.type) {
         case "Ready":
-          console.log(packet)
+          console.log(packet.users[0].bot)
+          this.emit("ready", new UserClient(packet.users[0], this))
         break;
-      }*/
+        case "Message":
+          this.emit("messageCreate", new Message(packet, this))
+      }
       
     };
   }
@@ -60,7 +66,26 @@ class Client extends EventEmitter {
   }
 
   requestAPI(method = "", params = "", data) {
-    
+    let object = {
+      method: method,
+      url: "https://api.revolt.chat" + params,
+      headers: {
+        "x-session-token": this.token,
+        "Accept": "application/json",
+        "Content-type": "application/json"
+      }
+    }
+  
+    if (data) object.data = data
+    console.log(object)
+  
+    return axios(object).then(x => "").catch(err => {
+      console.log(err)
+    })
+  }
+  
+  sendMessage(channelId, data) {
+    this.requestAPI("POST", Constants.ENDPOINTS.MESSAGE(channelId), data)
   }
 
 }

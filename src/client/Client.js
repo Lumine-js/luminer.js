@@ -1,5 +1,4 @@
 //========== STRUCTURE DATA
-//const Constants = require("./../util/constants.js")
 
 //========== PACKAGE
 const { EventEmitter } = require("node:events")
@@ -25,10 +24,6 @@ class Client extends EventEmitter {
     return this.ws.destroy()
   }
 
-  postCommand(commandsarray, guildid) {
-    
-  }
-
   startWebsocket() {
     let wssurl = `wss://ws.revolt.chat?version=1&format=json`
  
@@ -47,12 +42,13 @@ class Client extends EventEmitter {
     }
     this.ws.onmessage = ({ data }) => {
       let packet = JSON.parse(data)
-
+      console.log(packet)
+      /*
       switch (packet.type) {
         case "Ready":
           console.log(packet)
         break;
-      }
+      }*/
       
     };
   }

@@ -72,7 +72,7 @@ class Client extends EventEmitter {
       method: method,
       url: "https://api.revolt.chat" + params,
       headers: {
-        "x-session-token": this.token,
+        "x-bot-token": this.token,
         "Accept": "application/json",
         "Content-type": "application/json"
       }

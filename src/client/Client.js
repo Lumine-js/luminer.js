@@ -50,7 +50,10 @@ class Client extends EventEmitter {
       switch (packet.type) {
         case "Ready":
           console.log(packet.users[0].bot)
+          this.user = new UserClient(packet.d)
           this.emit("ready", new UserClient(packet.users[0], this))
+          const packg = require("./../../package.json")
+          console.log(`====== Lumine.js (Project)\n${packg.name} - ${packg.version}\n\nNow Login To ${new UserClient(packet.users[0], this).username}\n======`)
         break;
         case "Message":
           this.emit("messageCreate", new Message(packet, this))

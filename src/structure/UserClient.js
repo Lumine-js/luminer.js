@@ -5,9 +5,9 @@ class UserClient extends Base {
     this.recache = "user"
     this.id = options?._id
     this.username = options?.username
-    this.avatar = options.user.avatar
-    this.banner = options.user.banner
-    this.bot = options.type === "bot" ? true : false;
+    //this.avatar = options.user.avatar
+    //this.banner = options.user.banner
+    //this.bot = options.type === "bot" ? true : false;
     this.recache = "user"
   }
   
